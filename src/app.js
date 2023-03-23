@@ -8,6 +8,7 @@ function formatDate(timestamp) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
+
   let days = [
     "Sunday",
     "Monday",
@@ -26,30 +27,28 @@ function displayTemperature(response) {
   let cityElement = document.querySelector("#city");
   let descriptionElement = document.querySelector("#description");
   let humidityElement = document.querySelector("#humidity");
-  let speedyElement = document.querySelector("#wind");
+  let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
 
-  celsiusTemperature = Math.round(response.data.temperature.current[0]);
+  celsiusTemperature = response.data.main.temp;
 
-  temperatureElement.innerHTML = Math.round(
-    response.data.temperature.current[0]
-  );
-  cityElement.innerHTML = response.data.city;
-  descriptionElement.innerHTML = response.data.condition.description;
-  humidityElement.innerHTML = response.data.temperature.humidity;
-  speedyElement.innerHTML = Math.round(response.data.wind.speed);
-  dateElement.innerHTML = formatDate(response.data.time * 1000);
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  cityElement.innerHTML = response.data.name;
+  descriptionElement.innerHTML = response.data.weather[0].description;
+  humidityElement.innerHTML = response.data.main.humidity;
+  windElement.innerHTML = Math.round(response.data.wind.speed * 3.6);
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
   iconElement.setAttribute(
     "src",
-    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-  iconElement.setAttribute("alt", response.data.condition.description);
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 function search(city) {
-  let apiKey = "a2f9330boa2f048eb011fa427tc514e3";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  let apiKey = "2ff29bed3181c3526c35cc5408037f85";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayTemperature);
 }
 
@@ -62,10 +61,11 @@ function handleSubmit(event) {
 function displayFahrenheitTemperature(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
+
   celsiusLink.classList.remove("active");
   fahrenheitLink.classList.add("active");
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
 }
 
 function displayCelsiusTemperature(event) {
@@ -78,7 +78,7 @@ function displayCelsiusTemperature(event) {
 
 let celsiusTemperature = null;
 
-let form = document.querySelector("search-form");
+let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
