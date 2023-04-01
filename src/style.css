@@ -40,6 +40,7 @@ li::first-letter {
     rgb(51, 0, 131) 100.2%
   );
 }
+
 .weather-app {
   padding: 20px;
   border: 1px solid#FFE9E3;
@@ -99,4 +100,7 @@ li::first-letter {
 }
 .weather-forecast-temperature-min {
   opacity: 0.5;
+}
+.source-text {
+  text-align: center;
 }
