@@ -31,6 +31,7 @@ li {
 li::first-letter {
   text-transform: capitalize;
 }
+
 .weather-app-wrapper {
   max-width: 600px;
   margin: 30px auto;
@@ -53,13 +54,13 @@ li::first-letter {
   margin-right: 5px;
   margin-bottom: 0;
   padding-top: 0;
-  height: 64px;
-  width: 64px;
+  height: 80px;
+  width: 80px;
 }
 .d-flex-weather-temp strong {
-  color: rgb(33, 33, 33);
+  color: #b8fcff;
   margin-right: 5px;
-  font-size: 64px;
+  font-size: 85px;
   font-weight: 400;
   line-height: 1;
 }
@@ -103,4 +104,8 @@ li::first-letter {
 }
 .source-text {
   text-align: center;
+}
+.name {
+  text-align: center;
+  color: #f67280;
 }
