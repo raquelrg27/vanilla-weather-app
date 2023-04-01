@@ -47,7 +47,7 @@ function displayForecast(response) {
             forecastDay.time
           )}</div>
           <img
-            src="${forecastDay.condition.icon_url}.png"
+            src="${forecastDay.condition.icon_url}"
             alt=""
             width="36px"
           />
